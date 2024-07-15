@@ -51,14 +51,16 @@ defmodule NervesHubGeoTest do
     end
   end
 
-  describe "nerves_hub_geo pub_sub integration" do
+  describe "nerves_hub_geo pubsub integration" do
     test "server requests geo location" do
+      Application.put_env(:nerves_hub_geo, :resolver, TestResolver)
+
       PubSub.subscribe("device")
       PubSub.subscribe_to_hub()
 
       # Emulate nerves_hub_link passing us a server event
       PubSub.publish_channel_event("device", "location:request", %{})
-      assert_receive {:broadcast, :msg, "device", "location:request", %{}}
+      assert_receive {:broadcast, :msg, "device", "location:request", _}
       assert_receive {:to_hub, "device", "location:update", _}
     end
   end
