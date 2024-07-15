@@ -5,8 +5,6 @@ defmodule NervesHubGeo.DefaultResolver do
 
   require Logger
 
-  @whenwhere_url "http://whenwhere.nerves-project.org/"
-
   @impl Resolver
   def resolve_location() do
     case Whenwhere.asks() do

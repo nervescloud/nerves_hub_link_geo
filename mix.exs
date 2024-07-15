@@ -22,6 +22,8 @@ defmodule NervesHubGeo.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:whenwhere, "~> 0.1.0"},
+      {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
       {:nerves_hub_link, path: "../nerves_hub_link"}
     ]
   end

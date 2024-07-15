@@ -2,18 +2,21 @@ defmodule NervesHubGeo.Resolver do
   @typedoc "Supported location sources"
   @type sources() :: :gps | :geoip | :custom
 
-  @typedoc "Required information for a successful location resolution"
-  @type required_location_information() :: %{
-          latitude: float(),
-          longitude: float(),
-          source: sources()
+  @typedoc "Location information from a successful location resolution"
+  @type location_information() :: %{
+          :latitude => float(),
+          :longitude => float(),
+          :source => sources(),
+          optional(:accuracy) => pos_integer()
         }
 
-  @typedoc "Supported responses from `resolve_location/1`"
+  @typedoc "Formatted error response from a failed location resolution"
+  @type error_information() :: %{error_code: String.t(), error_description: String.t()}
+
+  @typedoc "Supported responses from `resolve_location/0`"
   @type location_responses() ::
-          {:ok, required_location_information()}
-          | {:ok, %{required_location_information() | accuracy: pos_integer()}}
-          | {:error, %{error_code: String.t(), error_description: String.t()}}
+          {:ok, location_information()}
+          | {:error, error_information()}
 
   @callback resolve_location() :: location_responses()
 end
