@@ -46,27 +46,24 @@ defmodule NervesHubLinkGeo do
   end
 
   @impl GenServer
-  def handle_info({:broadcast, :join, "device", _reply}, state) do
+  def handle_info(%PubSub.Message{type: :join, topic: "device"}, state) do
     location = resolve_location()
 
-    PubSub.publish_to_hub("device", "location:update", location)
+    NervesHubLink.Socket.send_message("device", "location:update", location)
 
     {:noreply, state}
   end
 
-  def handle_info({:broadcast, :msg, "device", "location:request", _params}, state) do
+  def handle_info(%PubSub.Message{type: :msg, topic: "device", event: "location:request"}, state) do
     location = resolve_location()
 
-    PubSub.publish_to_hub("device", "location:update", location)
+    NervesHubLink.Socket.send_message("device", "location:update", location)
 
     {:noreply, state}
   end
 
-  def handle_info({:broadcast, _, _, _}, state) do
-    {:noreply, state}
-  end
-
-  def handle_info({:broadcast, _, _, _, _}, state) do
+  # Calmly ignore the ones we don't care to process
+  def handle_info(%PubSub.Message{}, state) do
     {:noreply, state}
   end
 

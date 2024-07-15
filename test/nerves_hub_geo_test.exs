@@ -1,6 +1,9 @@
 defmodule NervesHubLinkGeoTest do
   use ExUnit.Case
+  use Mimic
+
   alias NervesHubLink.PubSub
+  alias NervesHubLink.Socket
 
   defmodule TestResolver do
     @behaviour NervesHubLinkGeo.Resolver
@@ -55,13 +58,24 @@ defmodule NervesHubLinkGeoTest do
     test "server requests geo location" do
       Application.put_env(:nerves_hub_link_geo, :resolver, TestResolver)
 
+      Socket
+      |> expect(:send_message, fn "device", "location:update", %{} -> dbg() end)
+
       PubSub.subscribe("device")
-      PubSub.subscribe_to_hub()
 
       # Emulate nerves_hub_link passing us a server event
       PubSub.publish_channel_event("device", "location:request", %{})
-      assert_receive {:broadcast, :msg, "device", "location:request", _}
-      assert_receive {:to_hub, "device", "location:update", _}
+
+      assert_receive %PubSub.Message{
+        type: :msg,
+        topic: "device",
+        event: "location:request",
+        params: %{}
+      }
     end
+
+    # test "geo location sent after the device has joined" do
+    #   # Need to figure this out
+    # end
   end
 end
