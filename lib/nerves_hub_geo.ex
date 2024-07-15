@@ -66,6 +66,10 @@ defmodule NervesHubGeo do
     {:noreply, state}
   end
 
+  def handle_info({:broadcast, _, _, _, _}, state) do
+    {:noreply, state}
+  end
+
   defp resolver() do
     Application.get_env(:nerves_hub_geo, :resolver, DefaultResolver)
   end
