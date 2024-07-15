@@ -24,7 +24,7 @@ defmodule NervesHubGeo.MixProject do
     [
       {:whenwhere, "~> 0.1.1"},
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
-      {:nerves_hub_link, path: "../nerves_hub_link"}
+      {:nerves_hub_link, github: "lawik/nerves_hub_link", branch: "extension-pubsub"}
     ]
   end
 end
