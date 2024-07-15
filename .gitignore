@@ -20,7 +20,7 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-nerves_hub_geo-*.tar
+nerves_hub_link_geo-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/

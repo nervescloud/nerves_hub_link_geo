@@ -1,4 +1,4 @@
-# NervesHubGeo
+# NervesHubLinkGeo
 
 **TODO: Add description**
 
@@ -7,7 +7,7 @@
 ```elixir
 def deps do
   [
-    {:nerves_hub_geo, "~> 0.1.0"}
+    {:nerves_hub_link_geo, "~> 0.1.0"}
   ]
 end
 ```

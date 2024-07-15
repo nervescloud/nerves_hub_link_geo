@@ -1,9 +1,9 @@
-defmodule NervesHubGeo.MixProject do
+defmodule NervesHubLinkGeo.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :nerves_hub_geo,
+      app: :nerves_hub_link_geo,
       version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
@@ -15,7 +15,7 @@ defmodule NervesHubGeo.MixProject do
   def application do
     [
       extra_applications: [:logger, :inets, :sasl],
-      mod: {NervesHubGeo.Application, []}
+      mod: {NervesHubLinkGeo.Application, []}
     ]
   end
 

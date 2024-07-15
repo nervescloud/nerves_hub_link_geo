@@ -1,4 +1,4 @@
-defmodule NervesHubGeo.Resolver do
+defmodule NervesHubLinkGeo.Resolver do
   @typedoc "Supported location sources"
   @type sources() :: :gps | :geoip | :custom
 

@@ -1,7 +1,7 @@
-defmodule NervesHubGeo.DefaultResolver do
-  @behaviour NervesHubGeo.Resolver
+defmodule NervesHubLinkGeo.DefaultResolver do
+  @behaviour NervesHubLinkGeo.Resolver
 
-  alias NervesHubGeo.Resolver
+  alias NervesHubLinkGeo.Resolver
 
   require Logger
 

@@ -1,7 +1,7 @@
-defmodule NervesHubGeo do
+defmodule NervesHubLinkGeo do
   use GenServer
 
-  alias NervesHubGeo.DefaultResolver
+  alias NervesHubLinkGeo.DefaultResolver
   alias NervesHubLink.PubSub
 
   require Logger
@@ -71,6 +71,6 @@ defmodule NervesHubGeo do
   end
 
   defp resolver() do
-    Application.get_env(:nerves_hub_geo, :resolver, DefaultResolver)
+    Application.get_env(:nerves_hub_link_geo, :resolver, DefaultResolver)
   end
 end
