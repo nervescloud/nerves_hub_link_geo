@@ -30,6 +30,11 @@ jobs:
       - name: Install system deps
         run: sudo apt-get install -y libmnl-dev
 
+      - name: Install fwup
+        run: |
+          wget https://github.com/fwup-home/fwup/releases/download/v${FWUP_VERSION}/fwup_${FWUP_VERSION}_amd64.deb
+          sudo dpkg -i fwup_1.10.1_amd64.deb && rm fwup_1.10.1_amd64.deb
+
       - name: Checkout code
         uses: actions/checkout@v3
 
