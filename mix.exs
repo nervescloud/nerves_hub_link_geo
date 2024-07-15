@@ -5,7 +5,7 @@ defmodule NervesHubGeo.MixProject do
     [
       app: :nerves_hub_geo,
       version: "0.1.0",
-      elixir: "~> 1.15",
+      elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -24,7 +24,7 @@ defmodule NervesHubGeo.MixProject do
     [
       {:whenwhere, "~> 0.1.1"},
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
-      {:nerves_hub_link, path: "../nerves_hub_link"}
+      {:nerves_hub_link, github: "lawik/nerves_hub_link", branch: "extension-pubsub"}
     ]
   end
 end
