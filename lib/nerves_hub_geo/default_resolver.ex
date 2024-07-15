@@ -11,14 +11,14 @@ defmodule NervesHubGeo.DefaultResolver do
       {:ok, resp} ->
         payload = %{
           source: :geoip,
-          latitude: resp.body["latitude"],
-          longitude: resp.body["longitude"]
+          latitude: resp[:latitude],
+          longitude: resp[:longitude]
         }
 
         {:ok, payload}
 
       {:error, error} ->
-        {:error, %{error_code: "HTTP_ERROR", error_description: inspect(error)}}
+        {:error, "HTTP_ERROR", inspect(error)}
     end
   end
 end

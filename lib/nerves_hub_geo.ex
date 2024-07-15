@@ -25,12 +25,12 @@ defmodule NervesHubGeo do
 
         result
 
-      {:error, error} ->
+      {:error, code, description} ->
         Logger.debug(
-          "[#{inspect(__MODULE__)}] Error resolving location information using #{resolver()} : #{inspect(error)}"
+          "[#{inspect(__MODULE__)}] Error resolving location information using #{resolver()} : (#{code}) #{description}"
         )
 
-        error
+        %{error_code: code, error_description: description}
     end
   rescue
     error ->
@@ -41,7 +41,7 @@ defmodule NervesHubGeo do
       %{
         error_code: "UNEXPECTED_ERROR",
         error_description:
-          "An unknown error occurred resolving the devices location : #{inspect(error)}"
+          "An unexpected error occurred resolving the devices location : #{inspect(error)}"
       }
   end
 
