@@ -20,14 +20,14 @@ defmodule NervesHubGeo do
     case resolver().resolve_location() do
       {:ok, result} ->
         Logger.debug(
-          "[#{inspect(__MODULE__)}] Location information resolution completed successfully using #{resolver()}"
+          "[#{inspect(__MODULE__)}] Location resolution completed successfully using #{resolver()}"
         )
 
         result
 
       {:error, code, description} ->
         Logger.debug(
-          "[#{inspect(__MODULE__)}] Error resolving location information using #{resolver()} : (#{code}) #{description}"
+          "[#{inspect(__MODULE__)}] Error resolving location using #{resolver()} : (#{code}) #{description}"
         )
 
         %{error_code: code, error_description: description}
