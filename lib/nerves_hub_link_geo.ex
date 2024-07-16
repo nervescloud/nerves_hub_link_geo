@@ -16,6 +16,10 @@ defmodule NervesHubLinkGeo do
     {:ok, %{}}
   end
 
+  def update_location() do
+    GenServer.cast(__MODULE__, :update_location)
+  end
+
   def resolve_location() do
     case resolver().resolve_location() do
       {:ok, result} ->
@@ -46,7 +50,7 @@ defmodule NervesHubLinkGeo do
   end
 
   @impl GenServer
-  def handle_info(%PubSub.Message{type: :join, topic: "device"}, state) do
+  def handle_cast(:update_location, state) do
     location = resolve_location()
 
     NervesHubLink.Socket.send_message("device", "location:update", location)
@@ -54,11 +58,14 @@ defmodule NervesHubLinkGeo do
     {:noreply, state}
   end
 
+  @impl GenServer
+  def handle_info(%PubSub.Message{type: :join, topic: "device"}, state) do
+    update_location()
+    {:noreply, state}
+  end
+
   def handle_info(%PubSub.Message{type: :msg, topic: "device", event: "location:request"}, state) do
-    location = resolve_location()
-
-    NervesHubLink.Socket.send_message("device", "location:update", location)
-
+    update_location()
     {:noreply, state}
   end
 
