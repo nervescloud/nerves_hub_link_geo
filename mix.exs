@@ -28,4 +28,17 @@ defmodule NervesHubLinkGeo.MixProject do
       {:mimic, "~> 1.7", only: :test}
     ]
   end
+
+  defp description() do
+    "A extension for NervesHubLink which hooks into available APIs to resolve a devices location."
+  end
+
+  defp package() do
+    [
+      organization: "nervescloud",
+      files: ~w(lib .formatter.exs mix.exs README.md LICENSE),
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/nervescloud/nerves_hub_link_geo"}
+    ]
+  end
 end
