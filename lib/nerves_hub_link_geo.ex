@@ -24,14 +24,14 @@ defmodule NervesHubLinkGeo do
     case resolver().resolve_location() do
       {:ok, result} ->
         Logger.debug(
-          "[#{inspect(__MODULE__)}] Location resolution completed successfully using #{resolver()}"
+          "[#{inspect(__MODULE__)}] Location resolution completed successfully using #{pretty_resolver_name()}"
         )
 
         result
 
       {:error, code, description} ->
         Logger.debug(
-          "[#{inspect(__MODULE__)}] Error resolving location using #{resolver()} : (#{code}) #{description}"
+          "[#{inspect(__MODULE__)}] Error resolving location using #{pretty_resolver_name()} : (#{code}) #{description}"
         )
 
         %{error_code: code, error_description: description}
@@ -39,7 +39,7 @@ defmodule NervesHubLinkGeo do
   rescue
     error ->
       Logger.debug(
-        "[#{inspect(__MODULE__)}] Unexpected error occurred while resolving the devices location using #{resolver()} : #{inspect(error)}"
+        "[#{inspect(__MODULE__)}] Unexpected error occurred while resolving the devices location using #{pretty_resolver_name()} : #{inspect(error)}"
       )
 
       %{
@@ -76,5 +76,11 @@ defmodule NervesHubLinkGeo do
 
   defp resolver() do
     Application.get_env(:nerves_hub_link_geo, :resolver, DefaultResolver)
+  end
+
+  defp pretty_resolver_name() do
+    resolver()
+    |> to_string()
+    |> String.replace_leading("Elixir.", "")
   end
 end
