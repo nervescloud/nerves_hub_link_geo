@@ -74,6 +74,11 @@ defmodule NervesHubLinkGeo do
     {:noreply, state}
   end
 
+  # Ignore disconnects
+  def handle_info(%{type: :disconnect}, state) do
+    {:noreply, state}
+  end
+
   defp resolver() do
     Application.get_env(:nerves_hub_link_geo, :resolver, DefaultResolver)
   end
